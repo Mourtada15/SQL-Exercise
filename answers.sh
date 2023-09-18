@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS graduates (
 
 # Copy Layal's data from students to graduates 
 INSERT INTO graduates (name, Age, Gender, Points, graduates)
-SELECT name, Age, Gender, Points, 01/01/\
+SELECT name, Age, Gender, Points, 0
 FROM students
 WHERE ID = 4;
 
@@ -43,6 +43,7 @@ WHERE name = 'Layal'
 # Remove Layal's record from students
 DELETE FROM students WHERE ID = 4
 
+# Joins
 # Produce a table that contains, for each employee, his/her name, company name, and company date.
 CREATE TABLE my_company AS 
 SELECT employees.name, employees.Company, companies.Date
@@ -55,3 +56,29 @@ SELECT name FROM my_company WHERE date < 2000
 
 # Find the name of company that has a graphic designer.
 SELECT Company FROM employees WHERE Role = "Graphic Designer"
+
+# Count & Filter
+# Find the person with the highest number of points in students
+SELECT Name 
+FROM students
+WHERE Points = (SELECT max(Points) FROM students);
+
+# Find the average of points in students
+SELECT avg(Points)
+FROM students
+
+# Find the number of students that have 500 points
+SELECT count(name)
+FROM students
+WHERE Points = 500;
+
+# Find the names of students that contains 's'
+SELECT name
+FROM students
+WHERE name like "%s%";
+
+# Find all students based on the decreasing order of their points
+SELECT name, Points
+FROM students
+ORDER BY Points DESC;
+
